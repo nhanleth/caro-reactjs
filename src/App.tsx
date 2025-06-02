@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 // Types
 interface SquareProps {
@@ -28,11 +28,7 @@ function calculateWinner(squares: (string | null)[]) {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (
-      squares[a] &&
-      squares[a] === squares[b] &&
-      squares[a] === squares[c]
-    ) {
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
   }
@@ -40,14 +36,16 @@ function calculateWinner(squares: (string | null)[]) {
 }
 
 function App() {
-  const [squares, setSquares] = useState<(string | null)[]>(Array(9).fill(null));
+  const [squares, setSquares] = useState<(string | null)[]>(
+    Array(9).fill(null)
+  );
   const [xIsNext, setXIsNext] = useState(true);
   const winner = calculateWinner(squares);
 
   function handleClick(i: number) {
     if (squares[i] || winner) return;
     const nextSquares = squares.slice();
-    nextSquares[i] = xIsNext ? 'X' : 'O';
+    nextSquares[i] = xIsNext ? "X" : "O";
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
   }
@@ -63,7 +61,7 @@ function App() {
   } else if (squares.every(Boolean)) {
     status = "It's a draw!";
   } else {
-    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
+    status = `Next player: ${xIsNext ? "X" : "O"}`;
   }
 
   return (
@@ -71,9 +69,9 @@ function App() {
       <h1>Tic Tac Toe</h1>
       <div className="status">{status}</div>
       <div className="board">
-        {[0, 1, 2].map(row => (
+        {[0, 1, 2].map((row) => (
           <div className="board-row" key={row}>
-            {[0, 1, 2].map(col => {
+            {[0, 1, 2].map((col) => {
               const idx = row * 3 + col;
               return (
                 <Square
@@ -86,9 +84,11 @@ function App() {
           </div>
         ))}
       </div>
-      <button className="restart" onClick={handleRestart}>Restart</button>
+      <button className="restart" onClick={handleRestart}>
+        Restart
+      </button>
     </div>
   );
 }
 
-export default App
+export default App;
